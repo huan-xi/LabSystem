@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huanxi.labsystem.dao.mapper.VpnuserMapper">
+  <resultMap id="BaseResultMap" type="com.huanxi.labsystem.dao.pojo.Vpnuser">
+    <id column="vpn_id" jdbcType="INTEGER" property="vpnId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="max_flow" jdbcType="BIGINT" property="maxFlow" />
+    <result column="send_flow" jdbcType="BIGINT" property="sendFlow" />
+    <result column="recv_flow" jdbcType="BIGINT" property="recvFlow" />
+    <result column="ov_username" jdbcType="CHAR" property="ovUsername" />
+    <result column="ov_password" jdbcType="VARCHAR" property="ovPassword" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    vpn_id, user_id, status, max_flow, send_flow, recv_flow, ov_username, ov_password
+  </sql>
+  <select id="selectByExample" parameterType="com.huanxi.labsystem.dao.pojo.VpnuserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from vpnuser
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from vpnuser
+    where vpn_id = #{vpnId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from vpnuser
+    where vpn_id = #{vpnId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.huanxi.labsystem.dao.pojo.VpnuserExample">
+    delete from vpnuser
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.huanxi.labsystem.dao.pojo.Vpnuser">
+    insert into vpnuser (vpn_id, user_id, status, 
+      max_flow, send_flow, recv_flow, 
+      ov_username, ov_password)
+    values (#{vpnId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, 
+      #{maxFlow,jdbcType=BIGINT}, #{sendFlow,jdbcType=BIGINT}, #{recvFlow,jdbcType=BIGINT}, 
+      #{ovUsername,jdbcType=CHAR}, #{ovPassword,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huanxi.labsystem.dao.pojo.Vpnuser">
+    insert into vpnuser
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vpnId != null">
+        vpn_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="maxFlow != null">
+        max_flow,
+      </if>
+      <if test="sendFlow != null">
+        send_flow,
+      </if>
+      <if test="recvFlow != null">
+        recv_flow,
+      </if>
+      <if test="ovUsername != null">
+        ov_username,
+      </if>
+      <if test="ovPassword != null">
+        ov_password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vpnId != null">
+        #{vpnId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="maxFlow != null">
+        #{maxFlow,jdbcType=BIGINT},
+      </if>
+      <if test="sendFlow != null">
+        #{sendFlow,jdbcType=BIGINT},
+      </if>
+      <if test="recvFlow != null">
+        #{recvFlow,jdbcType=BIGINT},
+      </if>
+      <if test="ovUsername != null">
+        #{ovUsername,jdbcType=CHAR},
+      </if>
+      <if test="ovPassword != null">
+        #{ovPassword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.huanxi.labsystem.dao.pojo.VpnuserExample" resultType="java.lang.Long">
+    select count(*) from vpnuser
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update vpnuser
+    <set>
+      <if test="record.vpnId != null">
+        vpn_id = #{record.vpnId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.maxFlow != null">
+        max_flow = #{record.maxFlow,jdbcType=BIGINT},
+      </if>
+      <if test="record.sendFlow != null">
+        send_flow = #{record.sendFlow,jdbcType=BIGINT},
+      </if>
+      <if test="record.recvFlow != null">
+        recv_flow = #{record.recvFlow,jdbcType=BIGINT},
+      </if>
+      <if test="record.ovUsername != null">
+        ov_username = #{record.ovUsername,jdbcType=CHAR},
+      </if>
+      <if test="record.ovPassword != null">
+        ov_password = #{record.ovPassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update vpnuser
+    set vpn_id = #{record.vpnId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=CHAR},
+      max_flow = #{record.maxFlow,jdbcType=BIGINT},
+      send_flow = #{record.sendFlow,jdbcType=BIGINT},
+      recv_flow = #{record.recvFlow,jdbcType=BIGINT},
+      ov_username = #{record.ovUsername,jdbcType=CHAR},
+      ov_password = #{record.ovPassword,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huanxi.labsystem.dao.pojo.Vpnuser">
+    update vpnuser
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="maxFlow != null">
+        max_flow = #{maxFlow,jdbcType=BIGINT},
+      </if>
+      <if test="sendFlow != null">
+        send_flow = #{sendFlow,jdbcType=BIGINT},
+      </if>
+      <if test="recvFlow != null">
+        recv_flow = #{recvFlow,jdbcType=BIGINT},
+      </if>
+      <if test="ovUsername != null">
+        ov_username = #{ovUsername,jdbcType=CHAR},
+      </if>
+      <if test="ovPassword != null">
+        ov_password = #{ovPassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where vpn_id = #{vpnId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huanxi.labsystem.dao.pojo.Vpnuser">
+    update vpnuser
+    set user_id = #{userId,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      max_flow = #{maxFlow,jdbcType=BIGINT},
+      send_flow = #{sendFlow,jdbcType=BIGINT},
+      recv_flow = #{recvFlow,jdbcType=BIGINT},
+      ov_username = #{ovUsername,jdbcType=CHAR},
+      ov_password = #{ovPassword,jdbcType=VARCHAR}
+    where vpn_id = #{vpnId,jdbcType=INTEGER}
+  </update>
+</mapper>

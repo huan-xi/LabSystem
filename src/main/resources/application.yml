@@ -1,0 +1,5 @@
+server:
+  port: 80
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.huanxi.labsystem.dao.pojo
