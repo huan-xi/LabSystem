@@ -4,12 +4,14 @@
   <resultMap id="BaseResultMap" type="com.huanxi.labsystem.dao.pojo.Vpnuser">
     <id column="vpn_id" jdbcType="INTEGER" property="vpnId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="send" jdbcType="BIGINT" property="send" />
+    <result column="recv" jdbcType="BIGINT" property="recv" />
     <result column="max_flow" jdbcType="BIGINT" property="maxFlow" />
-    <result column="send_flow" jdbcType="BIGINT" property="sendFlow" />
-    <result column="recv_flow" jdbcType="BIGINT" property="recvFlow" />
-    <result column="ov_username" jdbcType="CHAR" property="ovUsername" />
-    <result column="ov_password" jdbcType="VARCHAR" property="ovPassword" />
+    <result column="end_time" jdbcType="BIGINT" property="endTime" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="status" jdbcType="CHAR" property="status" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    vpn_id, user_id, status, max_flow, send_flow, recv_flow, ov_username, ov_password
+    vpn_id, user_id, send, recv, max_flow, end_time, create_time, username, password, 
+    status
   </sql>
   <select id="selectByExample" parameterType="com.huanxi.labsystem.dao.pojo.VpnuserExample" resultMap="BaseResultMap">
     select
@@ -103,12 +106,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.huanxi.labsystem.dao.pojo.Vpnuser">
-    insert into vpnuser (vpn_id, user_id, status, 
-      max_flow, send_flow, recv_flow, 
-      ov_username, ov_password)
-    values (#{vpnId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, 
-      #{maxFlow,jdbcType=BIGINT}, #{sendFlow,jdbcType=BIGINT}, #{recvFlow,jdbcType=BIGINT}, 
-      #{ovUsername,jdbcType=CHAR}, #{ovPassword,jdbcType=VARCHAR})
+    insert into vpnuser (vpn_id, user_id, send, 
+      recv, max_flow, end_time, 
+      create_time, username, password, 
+      status)
+    values (#{vpnId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{send,jdbcType=BIGINT}, 
+      #{recv,jdbcType=BIGINT}, #{maxFlow,jdbcType=BIGINT}, #{endTime,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.huanxi.labsystem.dao.pojo.Vpnuser">
     insert into vpnuser
@@ -119,23 +124,29 @@
       <if test="userId != null">
         user_id,
       </if>
-      <if test="status != null">
-        status,
+      <if test="send != null">
+        send,
+      </if>
+      <if test="recv != null">
+        recv,
       </if>
       <if test="maxFlow != null">
         max_flow,
       </if>
-      <if test="sendFlow != null">
-        send_flow,
+      <if test="endTime != null">
+        end_time,
       </if>
-      <if test="recvFlow != null">
-        recv_flow,
+      <if test="createTime != null">
+        create_time,
       </if>
-      <if test="ovUsername != null">
-        ov_username,
+      <if test="username != null">
+        username,
       </if>
-      <if test="ovPassword != null">
-        ov_password,
+      <if test="password != null">
+        password,
+      </if>
+      <if test="status != null">
+        status,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -145,23 +156,29 @@
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="status != null">
-        #{status,jdbcType=CHAR},
+      <if test="send != null">
+        #{send,jdbcType=BIGINT},
+      </if>
+      <if test="recv != null">
+        #{recv,jdbcType=BIGINT},
       </if>
       <if test="maxFlow != null">
         #{maxFlow,jdbcType=BIGINT},
       </if>
-      <if test="sendFlow != null">
-        #{sendFlow,jdbcType=BIGINT},
+      <if test="endTime != null">
+        #{endTime,jdbcType=BIGINT},
       </if>
-      <if test="recvFlow != null">
-        #{recvFlow,jdbcType=BIGINT},
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
       </if>
-      <if test="ovUsername != null">
-        #{ovUsername,jdbcType=CHAR},
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
       </if>
-      <if test="ovPassword != null">
-        #{ovPassword,jdbcType=VARCHAR},
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -180,23 +197,29 @@
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=CHAR},
+      <if test="record.send != null">
+        send = #{record.send,jdbcType=BIGINT},
+      </if>
+      <if test="record.recv != null">
+        recv = #{record.recv,jdbcType=BIGINT},
       </if>
       <if test="record.maxFlow != null">
         max_flow = #{record.maxFlow,jdbcType=BIGINT},
       </if>
-      <if test="record.sendFlow != null">
-        send_flow = #{record.sendFlow,jdbcType=BIGINT},
+      <if test="record.endTime != null">
+        end_time = #{record.endTime,jdbcType=BIGINT},
       </if>
-      <if test="record.recvFlow != null">
-        recv_flow = #{record.recvFlow,jdbcType=BIGINT},
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=BIGINT},
       </if>
-      <if test="record.ovUsername != null">
-        ov_username = #{record.ovUsername,jdbcType=CHAR},
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
       </if>
-      <if test="record.ovPassword != null">
-        ov_password = #{record.ovPassword,jdbcType=VARCHAR},
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=CHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -207,12 +230,14 @@
     update vpnuser
     set vpn_id = #{record.vpnId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=CHAR},
+      send = #{record.send,jdbcType=BIGINT},
+      recv = #{record.recv,jdbcType=BIGINT},
       max_flow = #{record.maxFlow,jdbcType=BIGINT},
-      send_flow = #{record.sendFlow,jdbcType=BIGINT},
-      recv_flow = #{record.recvFlow,jdbcType=BIGINT},
-      ov_username = #{record.ovUsername,jdbcType=CHAR},
-      ov_password = #{record.ovPassword,jdbcType=VARCHAR}
+      end_time = #{record.endTime,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -223,23 +248,29 @@
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="status != null">
-        status = #{status,jdbcType=CHAR},
+      <if test="send != null">
+        send = #{send,jdbcType=BIGINT},
+      </if>
+      <if test="recv != null">
+        recv = #{recv,jdbcType=BIGINT},
       </if>
       <if test="maxFlow != null">
         max_flow = #{maxFlow,jdbcType=BIGINT},
       </if>
-      <if test="sendFlow != null">
-        send_flow = #{sendFlow,jdbcType=BIGINT},
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=BIGINT},
       </if>
-      <if test="recvFlow != null">
-        recv_flow = #{recvFlow,jdbcType=BIGINT},
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=BIGINT},
       </if>
-      <if test="ovUsername != null">
-        ov_username = #{ovUsername,jdbcType=CHAR},
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
       </if>
-      <if test="ovPassword != null">
-        ov_password = #{ovPassword,jdbcType=VARCHAR},
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
       </if>
     </set>
     where vpn_id = #{vpnId,jdbcType=INTEGER}
@@ -247,12 +278,14 @@
   <update id="updateByPrimaryKey" parameterType="com.huanxi.labsystem.dao.pojo.Vpnuser">
     update vpnuser
     set user_id = #{userId,jdbcType=INTEGER},
-      status = #{status,jdbcType=CHAR},
+      send = #{send,jdbcType=BIGINT},
+      recv = #{recv,jdbcType=BIGINT},
       max_flow = #{maxFlow,jdbcType=BIGINT},
-      send_flow = #{sendFlow,jdbcType=BIGINT},
-      recv_flow = #{recvFlow,jdbcType=BIGINT},
-      ov_username = #{ovUsername,jdbcType=CHAR},
-      ov_password = #{ovPassword,jdbcType=VARCHAR}
+      end_time = #{endTime,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=BIGINT},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR}
     where vpn_id = #{vpnId,jdbcType=INTEGER}
   </update>
 </mapper>

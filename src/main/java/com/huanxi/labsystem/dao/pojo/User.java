@@ -9,7 +9,17 @@ public class User {
 
     private String password;
 
+    private String sex;
+
     private Long createTime;
+
+    private String email;
+
+    private String qq;
+
+    private String briefIntr;
+
+    private String status;
 
     public Integer getUserId() {
         return userId;
@@ -43,11 +53,51 @@ public class User {
         this.password = password == null ? null : password.trim();
     }
 
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex == null ? null : sex.trim();
+    }
+
     public Long getCreateTime() {
         return createTime;
     }
 
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq == null ? null : qq.trim();
+    }
+
+    public String getBriefIntr() {
+        return briefIntr;
+    }
+
+    public void setBriefIntr(String briefIntr) {
+        this.briefIntr = briefIntr == null ? null : briefIntr.trim();
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 }

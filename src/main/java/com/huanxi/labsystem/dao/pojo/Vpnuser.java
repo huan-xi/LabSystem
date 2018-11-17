@@ -5,17 +5,21 @@ public class Vpnuser {
 
     private Integer userId;
 
-    private String status;
+    private Long send;
+
+    private Long recv;
 
     private Long maxFlow;
 
-    private Long sendFlow;
+    private Long endTime;
 
-    private Long recvFlow;
+    private Long createTime;
 
-    private String ovUsername;
+    private String username;
 
-    private String ovPassword;
+    private String password;
+
+    private String status;
 
     public Integer getVpnId() {
         return vpnId;
@@ -33,12 +37,20 @@ public class Vpnuser {
         this.userId = userId;
     }
 
-    public String getStatus() {
-        return status;
+    public Long getSend() {
+        return send;
     }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+    public void setSend(Long send) {
+        this.send = send;
+    }
+
+    public Long getRecv() {
+        return recv;
+    }
+
+    public void setRecv(Long recv) {
+        this.recv = recv;
     }
 
     public Long getMaxFlow() {
@@ -49,35 +61,43 @@ public class Vpnuser {
         this.maxFlow = maxFlow;
     }
 
-    public Long getSendFlow() {
-        return sendFlow;
+    public Long getEndTime() {
+        return endTime;
     }
 
-    public void setSendFlow(Long sendFlow) {
-        this.sendFlow = sendFlow;
+    public void setEndTime(Long endTime) {
+        this.endTime = endTime;
     }
 
-    public Long getRecvFlow() {
-        return recvFlow;
+    public Long getCreateTime() {
+        return createTime;
     }
 
-    public void setRecvFlow(Long recvFlow) {
-        this.recvFlow = recvFlow;
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
     }
 
-    public String getOvUsername() {
-        return ovUsername;
+    public String getUsername() {
+        return username;
     }
 
-    public void setOvUsername(String ovUsername) {
-        this.ovUsername = ovUsername == null ? null : ovUsername.trim();
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
-    public String getOvPassword() {
-        return ovPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setOvPassword(String ovPassword) {
-        this.ovPassword = ovPassword == null ? null : ovPassword.trim();
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 }
