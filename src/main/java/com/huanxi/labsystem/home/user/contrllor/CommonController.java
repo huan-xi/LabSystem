@@ -1,6 +1,6 @@
 package com.huanxi.labsystem.home.user.contrllor;
 
-import com.huanxi.labsystem.common.ReturnMessage;
+import com.huanxi.labsystem.common.common.ReturnMessage;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;

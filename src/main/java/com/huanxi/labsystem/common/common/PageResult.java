@@ -1,4 +1,4 @@
-package com.huanxi.labsystem.common;
+package com.huanxi.labsystem.common.common;
 
 import java.io.Serializable;
 import java.util.List;

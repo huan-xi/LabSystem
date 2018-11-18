@@ -1,7 +1,8 @@
 package com.huanxi.labsystem.home.user.service.impl;
 
-import com.huanxi.labsystem.common.Constant;
-import com.huanxi.labsystem.common.ReturnMessage;
+import com.huanxi.labsystem.common.common.Constant;
+import com.huanxi.labsystem.common.common.ReturnMessage;
+import com.huanxi.labsystem.common.jwt.JwtUserTokenUtil;
 import com.huanxi.labsystem.common.util.Util;
 import com.huanxi.labsystem.dao.mapper.UserMapper;
 import com.huanxi.labsystem.dao.mapper.VpnuserMapper;
@@ -13,6 +14,8 @@ import com.huanxi.labsystem.home.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.List;
 
@@ -55,6 +58,7 @@ public class UserServiceImpl implements UserService {
     public ReturnMessage register(User user) {
         UserExample example = new UserExample();
         //格式合法性
+
         //账号唯一判断
         example.createCriteria().andUsernameEqualTo(user.getUsername());
         List<User> users = userMapper.selectByExample(example);
@@ -62,7 +66,7 @@ public class UserServiceImpl implements UserService {
             return new ReturnMessage(2, "该账号已存在");
         user.setCreateTime(new Date().getTime());
         user.setStatus(Constant.STATUS_NORMAL);
-        user.setStatus(Constant.SEX_MALE);
+        user.setSex(Constant.SEX_MALE);
         user.setPassword(Util.md5sum(user.getPassword()));
         if (userMapper.insert(user) > 0) {
             //添加openVPN用户
@@ -70,5 +74,17 @@ public class UserServiceImpl implements UserService {
                 return new ReturnMessage(1, "注册成功");
         }
         return new ReturnMessage(0, "未知错误");
+    }
+
+    @Override
+    public ReturnMessage login(User user, HttpServletResponse response) {
+        UserExample example=new UserExample();
+        example.createCriteria().andUsernameEqualTo(user.getUsername());
+        List<User> users=userMapper.selectByExample(example);
+        if (users!=null&&!users.isEmpty()) if (users.get(0).getPassword().equals(Util.md5sum(user.getPassword()))){
+            response.addCookie(new Cookie("token", JwtUserTokenUtil.generateToken(user)));
+            return new ReturnMessage(1,"/user/home");
+        }
+        return new ReturnMessage(3,"账号或密码错误！");
     }
 }
