@@ -16,8 +16,19 @@ public class NoLogin {
     }
 
     public static boolean notLogin(String url) {
-     return true;
+        if (noLogin.contains(url))
+            return true;
+        if (url.contains("/js"))
+            return true;
+        if (url.contains("/css"))
+            return true;
+        if (url.contains("/images"))
+            return true;
+        if (url.contains("/fonts"))
+            return true;
+        return false;
     }
+
     public static List<String> noLogin() {
         return noLogin;
     }
