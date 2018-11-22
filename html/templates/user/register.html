@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册</title>
+</head>
+<body>
+<h1>用户注册界面</h1>
+<div>
+    <form action="/user/register" method="post">
+        <label>账号：</label><input name="username"><br>
+        <label>昵称：</label><input name="nikname"><br>
+        <label>密码：</label><input type="password" name="password"><br>
+        <label>验证码：</label><input name="captcha"><br>
+        <img src="/common/captcha.jpg"></img>
+        <input type="submit" value="提交">
+    </form>
+</div>
+</body>
+</html>

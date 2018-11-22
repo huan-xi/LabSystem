@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-cn" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- Bootstrap CSS -->
+    <!--    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+        <link rel="stylesheet" th:href="@{/css/main.css}">-->
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../static/css/main.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+<!--    <script th:src="@{/js/html5shiv.min.js}"></script>
+    <script th:src="@{/js/respond.min.js}"></script>-->
+    <![endif]-->
+    <title>实验室博客</title>
+</head>
+<style type="text/css">
+    .line {
+        margin: 18px 5px 5px;
+        height: 15px;
+        border-left: solid 1px #bad5ba;
+    }
+
+    .navbar {
+        margin: 0;
+    }
+
+    .dropdown .dropdown-menu {
+        min-width: 120px;
+    }
+
+    @media screen and (max-width: 766px) {
+        .line {
+            display: none !important;
+        }
+
+        .carousel-inner > .item > img {
+            height: 260px !important;
+        }
+    }
+
+    .carousel-inner > .item > img {
+        width: 100%;
+        height: 340px;
+    }
+</style>
+<body>
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" id="navbar-toggle" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">LOGO</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="#"><i class="fa fa-home"></i> 首页<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="line"></li>
+                    <li><a href="#"><i class="fa fa-pencil-square-o"></i> 博客</a></li>
+                    <li class="line"></li>
+                    <li><a href="#"><i class="fa fa-pie-chart"></i> 团队成员</a></li>
+                    <li class="line"></li>
+                    <li><a href="#"><i class="fa fa-exclamation-circle"></i> 关于</a></li>
+                    <li class="line"></li>
+                    <li class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><i
+                                class="fa fa-flask"></i> 更多功能 <span class="fa fa-angle-down"></span> </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><i class="fa fa-comment"></i> 留言互动</a></li>
+                            <li><a href="#"><i class="fa fa-exclamation-circle"></i> 联系我们</a></li>
+                        </ul>
+                    </li>
+                    <li class="right-ioc"><a href="#" data-toggle="modal" data-target="#myLogin">登入</a></li>
+                    <li class="line right-line right-ioc"></li>
+                    <li class="right-ioc"><a href="#" data-toggle="modal" data-target="#mySearch">注册</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div>
+        <div class="row">
+            <div class="col-md-9">
+                <!--轮播图-->
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <img src="http://pic28.photophoto.cn/20130830/0005018373595008_b.jpg" alt="...">
+                        </div>
+                        <div class="item">
+                            <img src="http://pic28.photophoto.cn/20130830/0005018373595008_b.jpg" alt="...">
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-unstyled souul">
+                    <form name="keyform" method="get" action="https://www.0dayhack.com/">
+                        <div class="input-group">
+                            <input name="keyword" value="请善用搜索功能" class="form-control search soutext" type="text" onfocus="if (value =='请善用搜索功能'){value =''}" onblur="if (value ==''){value='请善用搜索功能'}">
+                            <div class="input-group-btn"> <button class="btn btn-default soubtn">搜索</button> </div>
+                        </div>
+                    </form>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="indexebox indexebox-l">
+            <i class="fa fa-picture-o"></i>
+            <h4>相册图库</h4>
+            <p>相册图库介绍</p>
+            <a class="btn btn-info btn-sm" href="https://www.0dayhack.com/">点击进入</a>
+        </div>
+    </div>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="../../static/js/jquery.min.js"></script>
+<script src="../../static/js/bootstrap.js"></script>
+</body>
+</html>
